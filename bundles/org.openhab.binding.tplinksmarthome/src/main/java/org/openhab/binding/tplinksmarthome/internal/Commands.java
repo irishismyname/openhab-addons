@@ -23,6 +23,7 @@ import org.openhab.binding.tplinksmarthome.internal.model.HasErrorResponse;
 import org.openhab.binding.tplinksmarthome.internal.model.Realtime;
 import org.openhab.binding.tplinksmarthome.internal.model.SetBrightness;
 import org.openhab.binding.tplinksmarthome.internal.model.SetLedOff;
+import org.openhab.binding.tplinksmarthome.internal.model.SetLightState;
 import org.openhab.binding.tplinksmarthome.internal.model.SetRelayState;
 import org.openhab.binding.tplinksmarthome.internal.model.SetSwitchState;
 import org.openhab.binding.tplinksmarthome.internal.model.Sysinfo;
@@ -203,6 +204,22 @@ public class Commands {
     }
 
     /**
+     * Returns the json for the set_light_state command to switch a bulb on or off.
+     *
+     * @param onOff the switch state to set
+     * @param transitionPeriod the transition period for the action to take place
+     * @return The json string of the command to send to the device
+     */
+    public String setStripLightState(OnOffType onOff, int transitionPeriod) {
+        SetLightState setLightState = new SetLightState();
+        SetLightState.LightOnOff lightState = new SetLightState.LightOnOff();
+        lightState.setOnOff(onOff);
+        lightState.setTransitionPeriod(transitionPeriod);
+        setLightState.setLightState(lightState);
+        return gson.toJson(setLightState);
+    }
+
+    /**
      * Returns the json for the set_led_off command to switch the led of the device on or off.
      *
      * @param onOff the led state to set
@@ -246,6 +263,23 @@ public class Commands {
     }
 
     /**
+     * Returns the json for the set_light_State command to set the brightness.
+     *
+     * @param brightness the brightness value
+     * @param transitionPeriod the transition period for the action to take place
+     * @return The json string of the command to send to the device
+     */
+    public String setLightStripBrightness(int brightness, int transitionPeriod) {
+        SetLightState setLightState = new SetLightState();
+        SetLightState.LightStateBrightness lightState = new SetLightState.LightStateBrightness();
+        lightState.setOnOff(brightness == 0 ? OnOffType.OFF : OnOffType.ON);
+        lightState.setBrightness(brightness);
+        lightState.setTransitionPeriod(transitionPeriod);
+        setLightState.setLightState(lightState);
+        return gson.toJson(setLightState);
+    }
+
+    /**
      * Returns the json for the set_light_State command to set the color.
      *
      * @param hsb the color to set
@@ -266,6 +300,26 @@ public class Commands {
     }
 
     /**
+     * Returns the json for the set_light_State command to set the color.
+     *
+     * @param hsb the color to set
+     * @param transitionPeriod the transition period for the action to take place
+     * @return The json string of the command to send to the device
+     */
+    public String setLightStripColor(HSBType hsb, int transitionPeriod) {
+        SetLightState setLightState = new SetLightState();
+        SetLightState.LightStateColor lightState = new SetLightState.LightStateColor();
+        int brightness = hsb.getBrightness().intValue();
+        lightState.setOnOff(brightness == 0 ? OnOffType.OFF : OnOffType.ON);
+        lightState.setBrightness(brightness);
+        lightState.setHue(hsb.getHue().intValue());
+        lightState.setSaturation(hsb.getSaturation().intValue());
+        lightState.setTransitionPeriod(transitionPeriod);
+        setLightState.setLightState(lightState);
+        return gson.toJson(setLightState);
+    }
+
+    /**
      * Returns the json for the set_light_State command to set the color temperature.
      *
      * @param colorTemperature the color temperature to set
@@ -280,6 +334,23 @@ public class Commands {
         lightState.setTransitionPeriod(transitionPeriod);
         transitionLightState.setLightState(lightState);
         return gson.toJson(transitionLightState);
+    }
+
+    /**
+     * Returns the json for the set_light_State command to set the color temperature.
+     *
+     * @param colorTemperature the color temperature to set
+     * @param transitionPeriod the transition period for the action to take place
+     * @return The json string of the command to send to the device
+     */
+    public String setLightStripColorTemperature(int colorTemperature, int transitionPeriod) {
+        SetLightState setLightState = new SetLightState();
+        SetLightState.LightStateColorTemperature lightState = new SetLightState.LightStateColorTemperature();
+        lightState.setOnOff(OnOffType.ON);
+        lightState.setColorTemperature(colorTemperature);
+        lightState.setTransitionPeriod(transitionPeriod);
+        setLightState.setLightState(lightState);
+        return gson.toJson(setLightState);
     }
 
     /**

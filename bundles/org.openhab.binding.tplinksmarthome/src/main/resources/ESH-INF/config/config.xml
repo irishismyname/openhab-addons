@@ -29,6 +29,30 @@
 		</parameter>
 	</config-description>
 
+	<config-description uri="thing-type:device:lightstrip">
+		<parameter name="ipAddress" type="text">
+			<context>network-address</context>
+			<label>IP Address</label>
+			<description>IP Address of the device.</description>
+		</parameter>
+		<parameter name="deviceId" type="text">
+			<label>Device Id</label>
+			<description>The id of the device.</description>
+		</parameter>
+		<parameter name="transitionPeriod" type="integer" min="0">
+			<label>Transition Period</label>
+			<description>Time the transition to the new state takes in milliseconds.</description>
+			<unitLabel>milliseconds</unitLabel>
+			<default>0</default>
+		</parameter>
+		<parameter name="refresh" type="integer" min="1">
+			<label>Refresh Rate</label>
+			<description>Refresh of device state in seconds.</description>
+			<unitLabel>seconds</unitLabel>
+			<default>30</default>
+		</parameter>
+	</config-description>
+
 	<config-description uri="thing-type:device:plug">
 		<parameter name="ipAddress" type="text">
 			<context>network-address</context>

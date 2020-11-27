@@ -25,6 +25,7 @@ import org.eclipse.smarthome.core.thing.binding.ThingHandlerFactory;
 import org.openhab.binding.tplinksmarthome.internal.device.BulbDevice;
 import org.openhab.binding.tplinksmarthome.internal.device.DimmerDevice;
 import org.openhab.binding.tplinksmarthome.internal.device.EnergySwitchDevice;
+import org.openhab.binding.tplinksmarthome.internal.device.LightStripDevice;
 import org.openhab.binding.tplinksmarthome.internal.device.PowerStripDevice;
 import org.openhab.binding.tplinksmarthome.internal.device.RangeExtenderDevice;
 import org.openhab.binding.tplinksmarthome.internal.device.SmartHomeDevice;
@@ -70,6 +71,9 @@ public class TPLinkSmartHomeHandlerFactory extends BaseThingHandlerFactory {
                 } else {
                     device = new BulbDevice(thingTypeUID);
                 }
+                break;
+            case LIGHTSTRIP:
+                device = new LightStripDevice();
                 break;
             case DIMMER:
                 device = new DimmerDevice();
